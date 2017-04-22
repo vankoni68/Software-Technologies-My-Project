@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Software_Technologies_Project.Models;
+using Blog.Models;
 
-namespace Software_Technologies_Project.Controllers
+namespace Blog.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -151,7 +151,7 @@ namespace Software_Technologies_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, FullName = model.FullName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
