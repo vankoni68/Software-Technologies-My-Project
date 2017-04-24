@@ -1116,8 +1116,8 @@ body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.42857143;
-  color: darkslateblue;
-  background-color: lightblue;
+  color: #1e183e;
+  background-color: #f0f0f0;
 }
 input,
 button,
@@ -3087,7 +3087,7 @@ fieldset[disabled] a.btn {
 }
 .btn-default {
   color: #ffffff;
-  background-color: #95a5a6;
+  background-color: #567b7b;
   border-color: #95a5a6;
 }
 .btn-default:focus,
@@ -7051,7 +7051,7 @@ article .author  {
   display: block;
   font-size: 100%;
   line-height: 1.42857143;
-  color: #b4bcc2;
+  color: #7790a2;
 }
 article .author  {
   content: '\2014 \00A0';
