@@ -1,0 +1,41 @@
+﻿@model Blog.Models.Skizone
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <article>
+        <header>
+            <h2>
+                @Model.Name
+            </h2>
+        </header>
+        <h4>
+            Elevation info: @Model.ElevationInfo
+        </h4>
+        <h4>
+            Runs/slopes: @Model.Slopes km.
+        </h4>
+        <h4>
+            Ticket Prise: @Model.LiftTicket $
+        </h4>
+        <p>
+            Current info:
+            @Model.ContentInfo
+        </p>
+        <small class="author">
+            --author @Model.Author.FullName
+        </small>
+        <footer class="pull-right">
+            @if (User.IsInRole("Admin") || Model.IsAuthor(User.Identity.GetUserId()))
+            {
+                @Html.ActionLink("Edit", "Edit", "Skizone", new { @id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+                @Html.ActionLink("Delete", "Delete", "Skizone", new { @id = Model.Id }, new { @class = "btn btn-danger btn-xs" })
+            }
+            @Html.ActionLink("Back", "Index", "Skizone", null, new { @class = "btn btn-default btn-xs" })
+        </footer>
+    </article>
+</div>
+<hr />

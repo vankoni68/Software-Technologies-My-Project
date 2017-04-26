@@ -1,0 +1,79 @@
+﻿@model List<Blog.Models.Skizone>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var skizone in Model)
+        {
+            <div class="col-sm-6">
+                <article>
+                    <header>
+                        <h2>
+                            @Html.ActionLink(skizone.Name, "Details", "Skizone", new { @id = skizone.Id }, null)
+                        </h2>
+                    </header>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="info-table">
+                                <tbody>
+                                    <tr>
+                                        <td>Elevation</td>
+                                        <td>@skizone.ElevationInfo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <td>
+                                            <span class="open">Ski resort open</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Slopes</span>
+                                        </td>
+                                        <td>
+                                            <span>@skizone.Slopes km.</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Ticket Prise</span>
+                                        </td>
+                                        <td>
+                                            <span>@skizone.LiftTicket €</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>Ski lifts</span>
+                                        </td>
+                                        <td>
+                                            <span>7 from 8 open</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br>
+                            <p>
+                                Current info: @skizone.ContentInfo
+                            </p>
+                        </div>
+                        <div class="col-sm-2">
+                        </div>
+                        <div class="col-xs-12">
+                            <span class="pull-right btn btn-default btn-sm">@Html.ActionLink(skizone.Name, "Details", "Skizone", new { @id = skizone.Id }, null)</span>
+                        </div>
+                    </div>
+                    <footer class="pull-right">
+                        <small class="author">
+                            --author @skizone.Author.FullName
+                        </small>
+                    </footer>
+                </article>
+            </div>
+        }
+    </div>
+</div>
+<hr />
