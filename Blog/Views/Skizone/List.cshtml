@@ -55,9 +55,12 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <br>
+                            @if (!string.IsNullOrEmpty(skizone.ImagePath))
+                            {
+                                <img src="@skizone.ImagePath" alt="Skizone Image" width="300" />
+                            }
                             <p>
-                                Current info: @skizone.ContentInfo
+                                @skizone.ContentInfo
                             </p>
                         </div>
                         <div class="col-sm-2">

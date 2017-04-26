@@ -19,10 +19,15 @@
             Runs/slopes: @Model.Slopes km.
         </h4>
         <h4>
-            Ticket Prise: @Model.LiftTicket $
+            Ticket Prise: @Model.LiftTicket € per day
         </h4>
+
+        @if (!string.IsNullOrEmpty(Model.ImagePath))
+        {
+            <img src="@Model.ImagePath" alt="Skizone Image" width="500" />
+        }
+
         <p>
-            Current info:
             @Model.ContentInfo
         </p>
         <small class="author">
