@@ -54,12 +54,18 @@ namespace Blog.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            using (var db = new BlogDbContext())
+            {
+                var model = new SkizoneViewModel();
+                model.Categories = db.Categories.OrderBy(c => c.Name).ToList();
+                return View(model);
+            }
+            
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult Create(Skizone model, HttpPostedFileBase image)
+        public ActionResult Create(SkizoneViewModel model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +91,8 @@ namespace Blog.Controllers
                         }
                     }
 
-                    db.Skizones.Add(model);
+                    var skizone = new Skizone(authorId, model.Name, model.ElevationInfo, model.CategoryId, model.Slopes, model.LiftTicket, model.ContentInfo, model.ImagePath);
+                    db.Skizones.Add(skizone);
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
@@ -186,6 +193,8 @@ namespace Blog.Controllers
                 model.LiftTicket = skizone.LiftTicket;
                 model.ImagePath = skizone.ImagePath;
                 model.ContentInfo = skizone.ContentInfo;
+                model.CategoryId = skizone.CategoryId;
+                model.Categories = db.Categories.OrderBy(c => c.Name).ToList();
                 return View(model);
             }
 
@@ -229,6 +238,7 @@ namespace Blog.Controllers
                     skizone.LiftTicket = model.LiftTicket;
                     skizone.ContentInfo = model.ContentInfo;
                     skizone.ImagePath = model.ImagePath;
+                    skizone.CategoryId = model.CategoryId;
                     db.Entry(skizone).State = EntityState.Modified;
                     db.SaveChanges();
 

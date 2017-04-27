@@ -17,7 +17,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("SKI Resorts", "Index", "Skizone", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("SKI Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SKI Categories", "ListCategories", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("SKI Articles", "Index", "Article", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 @Html.Partial("_LoginPartial")

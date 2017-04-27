@@ -36,5 +36,9 @@ namespace Blog.Models
         public string ImagePath { get; set; }
 
         public string AuthorId { get; set; }
+
+        public int CategoryId { get; set; }
+
+        public ICollection<Category> Categories { get; set; }
     }
 }

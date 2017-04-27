@@ -1,0 +1,44 @@
+﻿@model List<Blog.Models.Skizone>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var skizone in Model)
+        {
+            <div class="col-sm-6">
+                <article>
+                    <header>
+                        <h2>
+                            @Html.ActionLink(@skizone.Name, "Details", "Skizone", new { @id = skizone.Id }, null)
+                        </h2>
+                    </header>
+                    <h4>
+                        Elevation info: @skizone.ElevationInfo
+                    </h4>
+                    <h4>
+                        Runs/slopes: @skizone.Slopes km.
+                    </h4>
+                    <h4>
+                        Ticket Prise: @skizone.LiftTicket € per day
+                    </h4>
+                    @if (!string.IsNullOrEmpty(skizone.ImagePath))
+                    {
+                        <img src="@skizone.ImagePath" alt="Skizone Image" width="400" />
+                    }
+                    <p>
+                        @skizone.ContentInfo
+                    </p>
+                    <footer class="pull-right">
+                        <small class="author">
+                            --author @skizone.Author.FullName
+                        </small>
+                    </footer>
+                </article>
+            </div>
+        }
+    </div>
+</div>
+<hr />
