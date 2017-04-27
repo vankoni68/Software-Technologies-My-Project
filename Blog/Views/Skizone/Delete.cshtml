@@ -6,7 +6,7 @@
 <div class="container">
     <div class="well">
         <h2>Delete Ski Zone</h2>
-        @using (Html.BeginForm("Delete", "Skizone", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (Html.BeginForm("Delete", "Skizone", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken()
             
@@ -35,6 +35,20 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                @Html.Label("image", "Image", new { @class = "control-label col-sm-4" })
+                <div class="col-sm-4">
+                    @if (!string.IsNullOrEmpty(Model.ImagePath))
+                    {
+                        <img src="@Model.ImagePath" alt="Skizone Image" width="200" />
+                    }
+                    else
+                    {
+                        @Html.TextBox("image", "No image", new { @class = "form-control", @readonly = "readonly" })
+                    }
+                </div>
+            </div>
+    
             <div class="form-group">
                 @Html.LabelFor(m => m.ContentInfo, new { @class = "control-label col-sm-4" })
                 <div class="col-sm-4">

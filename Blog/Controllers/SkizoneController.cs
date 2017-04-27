@@ -184,6 +184,7 @@ namespace Blog.Controllers
                 model.ElevationInfo = skizone.ElevationInfo;
                 model.Slopes = skizone.Slopes;
                 model.LiftTicket = skizone.LiftTicket;
+                model.ImagePath = skizone.ImagePath;
                 model.ContentInfo = skizone.ContentInfo;
                 return View(model);
             }
@@ -192,7 +193,7 @@ namespace Blog.Controllers
 
         [Authorize]
         [HttpPost]
-        public ActionResult Edit(SkizoneViewModel model)
+        public ActionResult Edit(SkizoneViewModel model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -205,11 +206,29 @@ namespace Blog.Controllers
                         return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                     }
 
+                    if (image != null)
+                    {
+                        var allowedContentTypes = new[]
+                        {
+                            "image/jpeg", "image/jpg", "image/png"
+                        };
+                        if (allowedContentTypes.Contains(image.ContentType))
+                        {
+                            var imagesPath = "/Content/Images/";
+                            var filename = image.FileName;
+                            var uploadPath = imagesPath + filename;
+                            var physicalPath = Server.MapPath(uploadPath);
+                            image.SaveAs(physicalPath);
+                            model.ImagePath = uploadPath;
+                        }
+                    }
+
                     skizone.Name = model.Name;
                     skizone.ElevationInfo = model.ElevationInfo;
                     skizone.Slopes = model.Slopes;
                     skizone.LiftTicket = model.LiftTicket;
                     skizone.ContentInfo = model.ContentInfo;
+                    skizone.ImagePath = model.ImagePath;
                     db.Entry(skizone).State = EntityState.Modified;
                     db.SaveChanges();
 
